@@ -1,0 +1,20 @@
+@font-face {
+    font-family: 'Quicksand';
+    src: url('Quicksand-Regular.ttf')  format('truetype');
+}
+
+body {
+    background-color: #2E3037;
+}
+
+h1 {
+    font-family: 'Quicksand';
+    color: #FFFFFF;
+    font-size: 24pt;
+}
+
+p {
+    font-family: 'Quicksand';
+    color: #4DBFBA;
+    font-size: 18pt;
+}
