@@ -1,9 +1,31 @@
 use serde::{Serialize, Deserialize};
 use gloo::events::EventListener;
+use gloo_net::http::Request;
 use wasm_bindgen::JsCast;
 use wasm_bindgen::UnwrapThrowExt;
 use yew::prelude::*;
 use yew_router::prelude::*;
+
+fn read_slides(file: &str) -> Vec<String> {
+    // waage todo add callback
+    let mut requestString = String::new();
+    wasm_bindgen_futures::spawn_local(async move {
+        let request = Request::get("http://127.0.0.1:8080/slides.md").send().await.unwrap();
+        match request.body() {
+            Some(body) => requestString = body.as_string().unwrap(),
+            None => requestString = String::new()
+        }
+    });
+
+    return Vec::new();
+    /*return match fs::read_to_string(file) {
+        Err(e) => {
+            gloo_console::log!(format!("Error: {}", e));
+            return Vec::new();
+        },
+        Ok(s) => s.split("%%%\n").map(|s| s.to_string()).collect()
+    };*/
+}
 
 fn slide1() -> Html {
     html! {
@@ -17,9 +39,19 @@ fn slide2() -> Html {
     html! {
         <>
             <p>{ "HEY, WORLD, WHAT IS UP?" }</p>
-            <p>{ "Now we have the Emscripten compiler installed in our system. "}</p>
         </>
     }
+
+    /*let parser = pulldown_cmark::Parser::new(MD);
+
+    // Write to a new String buffer.
+    let mut html_output = String::new();
+    pulldown_cmark::html::push_html(&mut html_output, parser);
+
+    let div = gloo::utils::document().create_element("div").unwrap();
+    div.set_inner_html(&html_output);
+
+    Html::VRef(div.into())*/
 }
 
 fn slide3() -> Html {
@@ -34,6 +66,11 @@ fn slide3() -> Html {
 
 #[function_component(Slides)]
 fn slides() -> Html {
+    let slides = read_slides("data/slides.md");
+    for slide in slides {
+        gloo_console::log!(slide);
+    }
+
     let history = use_history().unwrap();
     let page_id = match history.location().query::<Page>() {
         Ok(page) => page.id,
@@ -63,8 +100,8 @@ enum Route {
 fn switch(route: &Route) -> Html {
     match route {
         Route::Home => html! {
-                <>
-                </>
+            <>
+            </>
         },
     }
 }
