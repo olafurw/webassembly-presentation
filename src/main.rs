@@ -6,25 +6,25 @@ use wasm_bindgen::UnwrapThrowExt;
 use yew::prelude::*;
 use yew_router::prelude::*;
 
-fn read_slides(file: &str) -> Vec<String> {
-    // waage todo add callback
-    let mut requestString = String::new();
-    wasm_bindgen_futures::spawn_local(async move {
-        let request = Request::get("http://127.0.0.1:8080/slides.md").send().await.unwrap();
-        match request.body() {
-            Some(body) => requestString = body.as_string().unwrap(),
-            None => requestString = String::new()
-        }
-    });
-
-    return Vec::new();
-    /*return match fs::read_to_string(file) {
-        Err(e) => {
-            gloo_console::log!(format!("Error: {}", e));
-            return Vec::new();
-        },
-        Ok(s) => s.split("%%%\n").map(|s| s.to_string()).collect()
-    };*/
+fn read_slides(slide_state: &UseStateHandle<Vec<String>>) {
+    let slide_state = slide_state.clone();
+    let f = async move {
+        let request = Request::get("http://127.0.0.1:8080/slides.md").send().await;
+        match request {
+            Ok(response) => {
+                let text = response.text().await;
+                match text {
+                    Ok(body) => { 
+                        let slides = vec![body];
+                        slide_state.set(slides);
+                    },
+                    Err(err) => { gloo_console::log!(format!("Error getting response text: {err}")); }
+                };
+            },
+            Err(err) => { gloo_console::log!(format!("Error in request: {err}")); }
+        };
+    };
+    wasm_bindgen_futures::spawn_local(f);
 }
 
 fn slide1() -> Html {
@@ -66,10 +66,8 @@ fn slide3() -> Html {
 
 #[function_component(Slides)]
 fn slides() -> Html {
-    let slides = read_slides("data/slides.md");
-    for slide in slides {
-        gloo_console::log!(slide);
-    }
+    let slide_list = use_context::<Vec<String>>().expect("EXPLODE");
+    gloo_console::log!(slide_list.len());
 
     let history = use_history().unwrap();
     let page_id = match history.location().query::<Page>() {
@@ -164,18 +162,26 @@ fn keyboardHack() -> Html {
     });
 
     html! {
-        <div></div>
+        <></>
     }
 }
 
 #[function_component(App)]
 fn app() -> Html {
+    let slide_list = use_state_eq(Vec::<String>::new);
+    read_slides(&slide_list);
+    if slide_list.is_empty() {
+        return html! { <></> };
+    }
+
     html! {
         <>
         <BrowserRouter>
             <KeyboardHack />
             <Switch<Route> render={Switch::render(switch)} />
-            <Slides />
+            <ContextProvider<Vec<String>> context={(*slide_list).clone()}>
+                <Slides />
+            </ContextProvider<Vec<String>>>
         </BrowserRouter>
         </>
     }
