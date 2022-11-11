@@ -5,6 +5,13 @@ use wasm_bindgen::JsCast;
 use wasm_bindgen::UnwrapThrowExt;
 use yew::prelude::*;
 use yew_router::prelude::*;
+use regex::Regex;
+
+fn parse_slides(text: &str) -> Vec<String> {
+    let pattern = Regex::new(r"\n(@@@[ \t]*)\n").unwrap();
+    let slides: Vec<String> = pattern.split(text).map(|x| x.trim().to_string()).collect();
+    slides
+}
 
 fn read_slides(slide_state: &UseStateHandle<Vec<String>>) {
     let slide_state = slide_state.clone();
@@ -15,8 +22,7 @@ fn read_slides(slide_state: &UseStateHandle<Vec<String>>) {
                 let text = response.text().await;
                 match text {
                     Ok(body) => { 
-                        let slides = vec![body];
-                        slide_state.set(slides);
+                        slide_state.set(parse_slides(&body));
                     },
                     Err(err) => { gloo_console::log!(format!("Error getting response text: {err}")); }
                 };
@@ -27,22 +33,8 @@ fn read_slides(slide_state: &UseStateHandle<Vec<String>>) {
     wasm_bindgen_futures::spawn_local(f);
 }
 
-fn slide1() -> Html {
-    html! {
-        <>
-            <p>{ "HEY, WORLD, WHAT IS UP?" }</p>
-        </>
-    }
-}
-
-fn slide2() -> Html {
-    html! {
-        <>
-            <p>{ "HEY, WORLD, WHAT IS UP?" }</p>
-        </>
-    }
-
-    /*let parser = pulldown_cmark::Parser::new(MD);
+fn slide(slide_text: &str) -> Html {
+    let parser = pulldown_cmark::Parser::new(slide_text);
 
     // Write to a new String buffer.
     let mut html_output = String::new();
@@ -51,37 +43,34 @@ fn slide2() -> Html {
     let div = gloo::utils::document().create_element("div").unwrap();
     div.set_inner_html(&html_output);
 
-    Html::VRef(div.into())*/
-}
-
-fn slide3() -> Html {
-    html! {
-        <>
-            <p>{ "HEY, WORLD, WHAT IS UP?" }</p>
-            <p>{ "Now we have the Emscripten compiler installed in our system. "}</p>
-            <p>{ "Time for the time honored tradition of the hello world example."}</p>
-        </>
-    }
+    Html::VRef(div.into())
 }
 
 #[function_component(Slides)]
 fn slides() -> Html {
-    let slide_list = use_context::<Vec<String>>().expect("EXPLODE");
-    gloo_console::log!(slide_list.len());
+    let slide_list = match use_context::<Vec<String>>() {
+        Some(s) => { s },
+        None => { 
+            gloo_console::log!("Error fetching slide context.");
+            return html!{ <></> };
+        }
+    };
+
+    if slide_list.is_empty() {
+        return html!{ <></> };
+    }
 
     let history = use_history().unwrap();
-    let page_id = match history.location().query::<Page>() {
-        Ok(page) => page.id,
+    let page_id: usize = match history.location().query::<Page>() {
+        Ok(page) => {
+            let slide_count = slide_list.len();
+            let page_id = page.id as usize;
+            if page_id >= slide_count { slide_count } else { page_id }
+        },
         Err(_) => 1,
     };
 
-    if page_id == 1 {
-        slide1()
-    } else if page_id == 2 {
-        slide2()
-    } else {
-        slide3()
-    }
+    slide(&slide_list[page_id - 1])
 }
 
 #[derive(Serialize, Deserialize)]
