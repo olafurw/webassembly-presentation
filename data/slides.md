@@ -31,6 +31,43 @@ How can something be neither Web nor Assembly?
 
 WebAssembly is a binary format* originally designed to allow for performant execution of code within browsers.
 
+@@@
+@standard
+
+# WHAT IS WEBASSEMBLY?
+
+WebAssembly is a binary format* originally designed to allow for performant execution of code within browsers.
+
+- Announced 2015
+
+@@@
+@standard
+
+# WHAT IS WEBASSEMBLY?
+
+WebAssembly is a binary format* originally designed to allow for performant execution of code within browsers.
+
+- Announced 2015
+- Working Drafts in 2018
+
+@@@
+@standard
+
+# WHAT IS WEBASSEMBLY?
+
+WebAssembly is a binary format* originally designed to allow for performant execution of code within browsers.
+
+- Announced 2015
+- Working Drafts in 2018
+- W3C recommendation in 2019
+
+@@@
+@standard
+
+# WHAT IS WEBASSEMBLY?
+
+WebAssembly is a binary format* originally designed to allow for performant execution of code within browsers.
+
 - Announced 2015
 - Working Drafts in 2018
 - W3C recommendation in 2019
