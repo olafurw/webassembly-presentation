@@ -3,18 +3,46 @@
     src: url('Quicksand-Regular.ttf')  format('truetype');
 }
 
+html {
+    /*background-image: url('test-background.png');*/
+    background-size: cover;
+}
+
 body {
     background-color: #2E3037;
+    font-family: 'Quicksand';
+    padding-left: 13.7%;
+    padding-right: 13%;
+    padding-top: 6%;
+
 }
 
-h1 {
-    font-family: 'Quicksand';
-    color: #FFFFFF;
-    font-size: 24pt;
-}
-
-p {
-    font-family: 'Quicksand';
+.standard h1 {
     color: #4DBFBA;
-    font-size: 18pt;
+    font-size: 36pt;
+    padding-bottom: 76pt; /* 102px */
+}
+
+.standard p {
+    color: #FFFFFF;
+    font-size: 48pt;
+    line-height: 56pt;
+    padding-bottom: 20pt;
+}
+
+.standard ul {
+    color: #FFFFFF;
+    font-size: 40pt;
+    padding-left: 42pt;
+    list-style: none;
+    padding-bottom: 12px;
+}
+
+.standard li {
+    padding-bottom: 12px;
+}
+
+.standard li::before {
+    content: "◦ ";
+    color: #4DBFBA;
 }

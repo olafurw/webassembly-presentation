@@ -33,14 +33,30 @@ fn read_slides(slide_state: &UseStateHandle<Vec<String>>) {
     wasm_bindgen_futures::spawn_local(f);
 }
 
+fn extract_css_class(slide_text: &str) -> (String, String) {
+    if slide_text.starts_with('@') {
+        let pattern = Regex::new(r"(@[a-zA-Z0-9_\-]+\n)").unwrap();
+        let cap = pattern.captures(slide_text).unwrap();
+        
+        let css_name = cap.get(1).unwrap().as_str().trim();
+        let css_name_len = css_name.len();
+        return (String::from(&css_name[1..]), String::from(&slide_text[css_name_len..]));
+    }
+
+    (String::new(), String::from(slide_text))
+}
+
 fn slide(slide_text: &str) -> Html {
-    let parser = pulldown_cmark::Parser::new(slide_text);
+    let (css_name, text) = extract_css_class(slide_text);
+
+    let parser = pulldown_cmark::Parser::new(text.as_str());
 
     // Write to a new String buffer.
     let mut html_output = String::new();
     pulldown_cmark::html::push_html(&mut html_output, parser);
 
     let div = gloo::utils::document().create_element("div").unwrap();
+    div.set_class_name(&css_name);
     div.set_inner_html(&html_output);
 
     Html::VRef(div.into())
