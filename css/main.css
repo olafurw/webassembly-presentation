@@ -4,23 +4,28 @@
 }
 
 html {
-    /*background-image: url('test-background.png');*/
-    background-size: cover;
+    height: 100%;
 }
 
 body {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+}
+
+.standard {
+    height: 100%;
     background-color: #2E3037;
     font-family: 'Quicksand';
     padding-left: 13.7%;
     padding-right: 13%;
     padding-top: 6%;
-
 }
 
 .standard h1 {
     color: #4DBFBA;
     font-size: 36pt;
-    padding-bottom: 76pt; /* 102px */
+    padding-bottom: 76pt;
 }
 
 .standard p {
@@ -45,4 +50,95 @@ body {
 .standard li::before {
     content: "◦ ";
     color: #4DBFBA;
+}
+
+.quote {
+    height: 100%;
+    background-color: #2E3037;
+    font-family: 'Quicksand';
+    padding-left: 13.7%;
+    padding-right: 13%;
+    padding-top: 22%;
+}
+
+.quote em {
+    color: #4DBFBA;
+    font-style: italic;
+    font-size: 46pt;
+    line-height: 56pt;
+    padding-bottom: 20pt;
+}
+
+.quote strong {
+    color: #4DBFBA;
+    font-weight: bold;
+    font-size: 36pt;
+    line-height: 56pt;
+    padding-bottom: 20pt;
+}
+
+.title {
+    height: 100%;
+    background-color: #2E3037;
+    font-family: 'Quicksand';
+    padding-left: 13.7%;
+    padding-right: 13%;
+    padding-top: 22%;
+}
+
+.title h1 {
+    color: #4DBFBA;
+    font-size: 56pt;
+}
+
+.title strong {
+    font-weight: bold;
+}
+
+.title p {
+    color: #FFFFFF;
+    font-size: 36pt;
+    line-height: 56pt;
+    padding-bottom: 20pt;
+}
+
+.promo {
+    height: 100%;
+    background-color: #2E3037;
+    font-family: 'Quicksand';
+    padding-left: 13.7%;
+    padding-right: 13%;
+    padding-top: 8%;
+}
+
+.promo h1 {
+    color: #4DBFBA;
+    font-size: 56pt;
+    padding-bottom: 8pt;
+    font-weight: bold;
+}
+
+.promo p {
+    color: #FFFFFF;
+    font-size: 36pt;
+    line-height: 50pt;
+}
+
+.promo img {
+    height: 300px;
+}
+
+.image-fullscreen {
+    height: 100%;
+    width: 100%;
+    background-color: #2E3037;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-fullscreen img {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
 }

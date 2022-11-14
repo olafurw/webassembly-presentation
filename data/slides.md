@@ -1,16 +1,42 @@
-Ólafur Waage
+@title
 
-Senior Software Developer - TurtleSec AS
-@olafurw on Twitter
+# **Sandbox Games**
 
-@@@
-
-I must go forward where I have never been instead of backwards where I have.
-Winnie the Pooh
+Using WebAssembly and C++ to make a simple game
 
 @@@
+@promo
 
-WHAT THIS TALK IS AND ISN’T
+![](/images/me.png)
+
+# Ólafur Waage
+
+Senior Software Developer - TurtleSec AS    
+<span style="color:#4DBFBA;font-weight:bold;">@olafurw</span> on Twitter    
+<span style="color:#4DBFBA;font-weight:bold;">@olafurw@mastodon.social</span> on Mastodon
+
+@@@
+@image-fullscreen
+
+![](/images/turtlesec.png)
+
+@@@
+@quote
+
+*"I must go forward where I have never been*    
+*instead of backwards where I have."*    
+
+@@@
+@quote
+
+*"I must go forward where I have never been*    
+*instead of backwards where I have."*    
+**Winnie the Pooh**
+
+@@@
+@standard
+
+# WHAT THIS TALK IS AND ISN’T
 
 This is not a game development or game design talk. A while ago I was making a game using WebAssembly and these are the walls I encountered along the way
 
@@ -19,8 +45,14 @@ This is not a comprehensive talk about WebAssembly.
 The idea here is to be pragmatic and learn what this tool has to offer and what problems it can solve.
 
 @@@
+@title
 
-What is WebAssembly?
+# What is WebAssembly?
+
+@@@
+@title
+
+# What is WebAssembly?
 
 How can something be neither Web nor Assembly?
 
@@ -84,8 +116,39 @@ Many of you might associate WebAssembly with games only, and even though this ta
 Here are some examples of things you might not have thought are written with WebAssembly.
 
 @@@
+@image-fullscreen
 
-What is Emscripten?
+![](/images/example-1.png)
+
+@@@
+@image-fullscreen
+
+![](/images/example-2.png)
+
+@@@
+@image-fullscreen
+
+![](/images/example-3.png)
+
+@@@
+@image-fullscreen
+
+![](/images/example-4.png)
+
+@@@
+@image-fullscreen
+
+![](/images/example-5.png)
+
+@@@
+@title
+
+# What is Emscripten?
+
+@@@
+@title
+
+# What is Emscripten?
 
 WebAssembly before WebAssembly
 
@@ -141,8 +204,14 @@ Yes, with nodejs we can run the .js files just fine.
 But let’s start by opening the HTML file directly. Should be no problem, right?
 
 @@@
+@title
 
-WALL NUMBER 1
+# WALL NUMBER 1
+
+@@@
+@title
+
+# WALL NUMBER 1
 
 Of CORS there’s a problem here
 
@@ -200,8 +269,14 @@ So let’s take some of the functions we have in the JS version and convert them
 Some of them don’t even need to know about game state, so let’s start with them.
 
 @@@
+@title
 
-WALL NUMBER 2
+# WALL NUMBER 2
+
+@@@
+@title
+
+# WALL NUMBER 2
 
 Where we’re going, there is no OS
 
@@ -247,8 +322,14 @@ The board is an array of arrays of `Box` and the rest of the game logic is basic
 So now the gameplay can be simulated and called from JS, now we need to draw that data.
 
 @@@
+@title
 
-WALL NUMBER 3
+# WALL NUMBER 3
+
+@@@
+@title
+
+# WALL NUMBER 3
 
 Where’s the data?
 
@@ -340,10 +421,16 @@ Everything compiles and looks like it should be.
 I run the code, I see the box and then…
 
 @@@
+@title
 
-WALL NUMBER 4
+# WALL NUMBER 4
 
-The sandbox isn’t infinite
+@@@
+@title
+
+# WALL NUMBER 4
+
+The sandbox isn't infinite
 
 @@@
 @standard
@@ -366,8 +453,14 @@ Great, this compiles and we see the box drawn in the canvas as before.
 So let’s draw the text that should appear within the box.
 
 @@@
+@title
 
-WALL NUMBER 5
+# WALL NUMBER 5
+
+@@@
+@title
+
+# WALL NUMBER 5
 
 File not found
 
@@ -415,11 +508,15 @@ Let’s summarize the walls we encountered:
 - Required files need to be embedded or preloaded with the output
 
 @@@
+@promo
 
-Ólafur Waage
+![](/images/me.png)
 
-Senior Software Developer - TurtleSec AS
-@olafurw on Twitter
+# Ólafur Waage
+
+Senior Software Developer - TurtleSec AS    
+<span style="color:#4DBFBA;font-weight:bold;">@olafurw</span> on Twitter    
+<span style="color:#4DBFBA;font-weight:bold;">@olafurw@mastodon.social</span> on Mastodon    
 https://github.com/olafurw/talk-accu-webassembly
 
 @@@
