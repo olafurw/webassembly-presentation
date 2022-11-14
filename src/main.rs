@@ -3,6 +3,7 @@ use gloo::events::EventListener;
 use gloo_net::http::Request;
 use wasm_bindgen::JsCast;
 use wasm_bindgen::UnwrapThrowExt;
+use yew::{function_component, Properties};
 use yew::prelude::*;
 use yew_router::prelude::*;
 use regex::Regex;
@@ -16,7 +17,7 @@ fn parse_slides(text: &str) -> Vec<String> {
 fn read_slides(slide_state: &UseStateHandle<Vec<String>>) {
     let slide_state = slide_state.clone();
     let f = async move {
-        let request = Request::get("http://127.0.0.1:8080/slides.md").send().await;
+        let request = Request::get("http://127.0.0.1:8000/slides.md").send().await;
         match request {
             Ok(response) => {
                 let text = response.text().await;
@@ -24,10 +25,10 @@ fn read_slides(slide_state: &UseStateHandle<Vec<String>>) {
                     Ok(body) => { 
                         slide_state.set(parse_slides(&body));
                     },
-                    Err(err) => { gloo_console::log!(format!("Error getting response text: {err}")); }
+                    Err(err) => { gloo_console::log!(format!("error, getting response text: {err}")); }
                 };
             },
-            Err(err) => { gloo_console::log!(format!("Error in request: {err}")); }
+            Err(err) => { gloo_console::log!(format!("error, getting request: {err}")); }
         };
     };
     wasm_bindgen_futures::spawn_local(f);
@@ -67,7 +68,7 @@ fn slides() -> Html {
     let slide_list = match use_context::<Vec<String>>() {
         Some(s) => { s },
         None => { 
-            gloo_console::log!("Error fetching slide context.");
+            gloo_console::log!("error, fetching slide context.");
             return html!{ <></> };
         }
     };
@@ -109,13 +110,16 @@ fn switch(route: &Route) -> Html {
     }
 }
 
-fn next_page_id(code: u32, page_id: u32) -> u32 {
+fn next_page_id(code: u32, page_id: u32, last_page_id: u32) -> u32 {
     if page_id == 0 {
         return 1;
     }
 
     // space or right arrow
     if code == 32 || code == 39 {
+        if page_id + 1 > last_page_id {
+            return page_id;
+        }
         return page_id + 1;
     }
 
@@ -127,19 +131,35 @@ fn next_page_id(code: u32, page_id: u32) -> u32 {
     page_id
 }
 
+#[derive(Properties, PartialEq)]
+struct KeyboardHackProps {
+    slide_count: usize,
+}
+
 #[function_component(KeyboardHack)]
-fn keyboardHack() -> Html {
+fn keyboardHack(props: &KeyboardHackProps) -> Html {
+    let last_page_id = props.slide_count as u32;
+
     let history = use_history().unwrap();
+
+    // fixing ids so they don't go over or under the slide count
     match history.location().query::<Page>() {
-        Ok(_) => (),
+        Ok(page) => {
+            if page.id > last_page_id {
+                match history.push_with_query(Route::Home, Page{ id: last_page_id }) {
+                    Ok(_) => (),
+                    Err(_) => gloo_console::log!("error, setting overflowed id"),
+                };
+            }
+        },
         Err(_) => {
             match history.push_with_query(Route::Home, Page{ id: 1 }) {
                 Ok(_) => (),
-                Err(_) => gloo_console::log!("initial page error"),
+                Err(_) => gloo_console::log!("error, setting initial page"),
             };
         },
     };
-
+    
     use_effect(move || {
         // Attach a keydown event listener to the document.
         let document = gloo::utils::document();
@@ -152,9 +172,14 @@ fn keyboardHack() -> Html {
 
             match history.location().query::<Page>() {
                 Ok(page) => {
-                    match history.push_with_query(Route::Home, Page{ id: next_page_id(event.key_code(), page.id) }) {
+                    let next_page = next_page_id(event.key_code(), page.id, last_page_id);
+                    if next_page == page.id {
+                        return;
+                    }
+
+                    match history.push_with_query(Route::Home, Page{ id: next_page }) {
                         Ok(_) => (),
-                        Err(_) => gloo_console::log!("push_with_query error"),
+                        Err(_) => gloo_console::log!("error, push_with_query"),
                     };
                 },
                 Err(_) => gloo_console::log!("error, no page"),
@@ -182,7 +207,7 @@ fn app() -> Html {
     html! {
         <>
         <BrowserRouter>
-            <KeyboardHack />
+            <KeyboardHack slide_count={slide_list.len()} />
             <Switch<Route> render={Switch::render(switch)} />
             <ContextProvider<Vec<String>> context={(*slide_list).clone()}>
                 <Slides />

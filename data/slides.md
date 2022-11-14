@@ -518,5 +518,3 @@ Senior Software Developer - TurtleSec AS
 <span style="color:#4DBFBA;font-weight:bold;">@olafurw</span> on Twitter    
 <span style="color:#4DBFBA;font-weight:bold;">@olafurw@mastodon.social</span> on Mastodon    
 https://github.com/olafurw/talk-accu-webassembly
-
-@@@
