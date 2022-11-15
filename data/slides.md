@@ -303,10 +303,11 @@ Thankfully there is a solution to this, where if you build a .js file in additio
 But how does it work? Can we do it ourselves?
 
 @@@
+@standard
 
-EMSCRIPTEN RANDOM
+# EMSCRIPTEN RANDOM
 
-img
+![](/images/random.png)
 
 Looks great, but how do we use it?
 
@@ -343,20 +344,22 @@ We can communicate between C++ and JS using primitive types as you saw before, b
 We could view the raw data of a std::vector within the memory of WebAssembly, but converting between a vector and a javascript list is not automatic
 
 @@@
+@standard
 
-WE’RE IN A BIND
+# WE’RE IN A BIND
 
 There is something called Embind that can help with passing more complex objects over to JS
 
-img
+![](/images/bind-class.png)
 
 @@@
+@standard
 
-WE’RE IN A BIND
+# WE’RE IN A BIND
 
 Embind even has helpers to bind common objects, like std::vector
 
-img
+![](/images/bind-vector.png)
 
 @@@
 @standard
@@ -398,7 +401,7 @@ Emscripten has built in support for SDL which is a cross platform library that p
 
 There is also support for SDL2 but it needs to be downloaded (which happens on first compile)
 
-img
+![](/images/sdl1-2.png)
 
 @@@
 @standard
@@ -441,7 +444,7 @@ Up to this point I have been using the default memory size and it has just happe
 
 But we need more memory now since SDL is involved.
 
-img
+![](/images/memory-manage.png)
 
 @@@
 @standard
@@ -473,8 +476,7 @@ The environment we are in does not have much else outside of what we have given 
 
 So the font file we want to use does not exist, and the idea of a filesystem is different from what we expect. We have to provide the files.
 
-img
-img
+![](/images/preload-file.png)
 
 @@@
 @standard
@@ -483,7 +485,7 @@ img
 
 What Emscripten also provides is helper utilities to use common development tools like make and cmake. So I also wrote a simple CMake file for building the project.
 
-img
+![](/images/emcmake.png)
 
 @@@
 @standard
