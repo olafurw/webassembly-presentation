@@ -123,6 +123,16 @@ WebAssembly is a binary format* originally designed to allow for performant exec
 WebAssembly can be thought of as the target output of any language and in recent times can be executed outside of the web.
 
 @@@
+@image-fullscreen
+
+![](/images/wasm-code-1.png)
+
+@@@
+@image-fullscreen
+
+![](/images/wasm-code-2.png)
+
+@@@
 @standard
 
 # WEBASSEMBLY EXAMPLES?
@@ -255,6 +265,67 @@ Let’s go over the installation process and setup a simple development environm
 - WSL2 running Ubuntu 20.04
 - https://github.com/olafurw/talk-accu-webassembly
 
+
+@@@
+@image-fullscreen
+
+![](/images/install-1.png)
+
+
+@@@
+@image-fullscreen
+
+![](/images/install-2.png)
+
+
+@@@
+@image-fullscreen
+
+![](/images/install-3.png)
+
+
+@@@
+@image-fullscreen
+
+![](/images/install-4.png)
+
+
+@@@
+@image-fullscreen
+
+![](/images/install-5.png)
+
+
+@@@
+@image-fullscreen
+
+![](/images/install-6.png)
+
+@@@
+@image-fullscreen
+
+![](/images/install-7.png)
+
+@@@
+@image-fullscreen
+
+![](/images/installed-1.png)
+
+@@@
+@image-fullscreen
+
+![](/images/installed-2.png)
+
+@@@
+@image-fullscreen
+
+![](/images/installed-3.png)
+
+@@@
+@image-fullscreen
+
+![](/images/installed-4.png)
+
 @@@
 @standard
 
@@ -281,6 +352,41 @@ Now we have the Emscripten compiler installed in our system.
 Time for the time honored tradition of the hello world example.
 
 But there are a few more steps in this one than you’d normally expect.
+
+@@@
+@image-fullscreen-dark
+
+![](/images/helloworld-1.png)
+
+@@@
+@image-fullscreen-dark
+
+![](/images/helloworld-2.png)
+
+@@@
+@image-fullscreen-dark
+
+![](/images/helloworld-3.png)
+
+@@@
+@image-fullscreen-dark
+
+![](/images/helloworld-more-1.png)
+
+@@@
+@image-fullscreen-dark
+
+![](/images/helloworld-more-2.png)
+
+@@@
+@image-fullscreen-dark
+
+![](/images/helloworld-more-3.png)
+
+@@@
+@image-fullscreen-dark
+
+![](/images/helloworld-more-4.png)
 
 @@@
 @standard
@@ -365,6 +471,16 @@ What I use while developing is emrun, a tool that comes with emscripten.
 emrun is a simple webserver but for our development purposes it is good enough.
 
 @@@
+@image-fullscreen-dark
+
+![](/images/helloworld-run-1.png)
+
+@@@
+@image-fullscreen-dark
+
+![](/images/helloworld-run-2.png)
+
+@@@
 @standard
 
 # VIDEO GAMES!
@@ -447,6 +563,51 @@ So let’s take some of the functions we have in the JS version and convert them
 Some of them don’t even need to know about game state, so let’s start with them.
 
 @@@
+@image-fullscreen-dark
+
+![](/images/game-code-1.png)
+
+@@@
+@image-fullscreen-dark
+
+![](/images/game-code-2-1.png)
+
+@@@
+@image-fullscreen-dark
+
+![](/images/game-code-2-2.png)
+
+@@@
+@image-fullscreen-dark
+
+![](/images/game-code-2.png)
+
+@@@
+@image-fullscreen-dark
+
+![](/images/game-code-build.png)
+
+@@@
+@image-fullscreen-dark
+
+![](/images/game-code-3-1.png)
+
+@@@
+@image-fullscreen-dark
+
+![](/images/game-code-3-2.png)
+
+@@@
+@image-fullscreen-dark
+
+![](/images/game-code-3-3.png)
+
+@@@
+@image-fullscreen-dark
+
+![](/images/game-code-1.png)
+
+@@@
 @title
 
 # WALL NUMBER 2
@@ -520,6 +681,61 @@ But how does it work? Can we do it ourselves?
 ![](/images/random.png)
 
 Looks great, but how do we use it?
+
+@@@
+@image-fullscreen-dark
+
+![](/images/game-code-4-1.png)
+
+@@@
+@image-fullscreen-dark
+
+![](/images/game-code-4-2.png)
+
+@@@
+@image-fullscreen-dark
+
+![](/images/game-code-4-3.png)
+
+@@@
+@image-fullscreen-dark
+
+![](/images/game-code-5-1.png)
+
+@@@
+@image-fullscreen-dark
+
+![](/images/game-code-5-2.png)
+
+@@@
+@image-fullscreen-dark
+
+![](/images/game-code-6-1.png)
+
+@@@
+@image-fullscreen-dark
+
+![](/images/game-code-6-2.png)
+
+@@@
+@image-fullscreen-dark
+
+![](/images/game-code-6-3.png)
+
+@@@
+@image-fullscreen-dark
+
+![](/images/game-code-6-4.png)
+
+@@@
+@image-fullscreen-dark
+
+![](/images/game-code-6-5.png)
+
+@@@
+@image-fullscreen-dark
+
+![](/images/game-code-7-1.png)
 
 @@@
 @standard
@@ -708,6 +924,11 @@ Also since we will use SDL2 and other built in functionality, we will use the ge
 So instead of creating the importObject ourselves and implementing the functions that are needed, Emscripten has does this for us.
 
 @@@
+@image-fullscreen-dark
+
+![](/images/game-code-main.png)
+
+@@@
 @standard
 
 # RENDERING FUN
@@ -733,6 +954,11 @@ Now I port over the rendering code, which thankfully for this example is just a 
 Everything compiles and looks like it should be.
 
 I run the code, I see the box and then...
+
+@@@
+@image-fullscreen
+
+![](/images/game-code-memory-error.png)
 
 @@@
 @title
@@ -856,7 +1082,7 @@ So I also wrote a simple CMake file for building the project.
 ![](/images/emcmake.png)
 
 @@@
-@image-fullscreen
+@image-fullscreen-dark
 
 ![](/images/cmake.png)
 
