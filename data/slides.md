@@ -1,3 +1,17 @@
+@standard
+
+# **Test slide. Can you read this?**
+
+Sample text size!
+- Sample bullet text size.
+
+.    
+Sample code color and size.
+![](/images/sample-code.png)
+
+text will go about this far down
+
+@@@
 @title
 
 # **Sandbox Games**
