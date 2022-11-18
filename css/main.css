@@ -157,3 +157,18 @@ body {
     height: 100%;
     object-fit: fill;
 }
+
+.example-frame-1 {
+    position: absolute;
+    background-color: #FFFFFF;
+    top: 350px;
+    overflow:scroll;
+}
+
+.example-frame-2 {
+    position: absolute;
+    background-color: #FFFFFF;
+    top: 550px;
+    left: 700px;
+    overflow:scroll;
+}

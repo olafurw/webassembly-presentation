@@ -492,6 +492,8 @@ emrun is a simple webserver but for our development purposes it is good enough.
 @@@
 @image-fullscreen-dark
 
+<iframe class="example-frame-1" src="http://127.0.0.1:8001/hello_world.html" height="800" width="800"></iframe>
+
 ![](/images/helloworld-run-2.png)
 
 @@@
@@ -509,6 +511,17 @@ Now let’s look at the game we will be “making”.
 Now let’s look at the game we will be “making”.
 
 We are going to make a simple sliding puzzle game, similar to games like “Threes” and “2048”
+
+@@@
+@standard
+
+# VIDEO GAMES!
+
+Now let’s look at the game we will be “making”.
+
+We are going to make a simple sliding puzzle game, similar to games like “Threes” and “2048”
+
+<iframe class="example-frame-2" scrolling="no" src="http://localhost:8002/index.html" height="420" width="420"></iframe>
 
 @@@
 @standard
@@ -850,6 +863,11 @@ You can even define a shared block of memory that can then be used by either JS 
 Also there is the option to return a pointer to JS
 
 But this is in the territory where you need to be a bit more careful with how each byte is used and represented.
+
+@@@
+@image-fullscreen
+
+![](/images/webassembly-portability.png)
 
 @@@
 @standard
