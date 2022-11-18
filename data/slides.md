@@ -886,6 +886,11 @@ Thankfully, I wrote the game logic to only use simple primitives, so we can fini
 Let’s look at this version of the implementation.
 
 @@@
+@image-fullscreen
+
+<iframe class="example-frame-1" src="http://127.0.0.1:8003/index.html" height="420" width="420"></iframe>
+
+@@@
 @standard
 
 # LET’S NOT STOP HERE!
@@ -968,11 +973,19 @@ So instead of creating the importObject ourselves and implementing the functions
 Now I port over the rendering code, which thankfully for this example is just a simple colored rectangle. (I wait with displaying the text for now)
 
 @@@
+@image-fullscreen-dark
+
+![](/images/sdl-draw-1.png)
+
+@@@
+@image-fullscreen-dark
+
+![](/images/sdl-draw-2.png)
+
+@@@
 @standard
 
 # RENDERING FUN
-
-Now I port over the rendering code, which thankfully for this example is just a simple colored rectangle. (I wait with displaying the text for now)
 
 Everything compiles and looks like it should be.
 
@@ -981,11 +994,33 @@ Everything compiles and looks like it should be.
 
 # RENDERING FUN
 
-Now I port over the rendering code, which thankfully for this example is just a simple colored rectangle. (I wait with displaying the text for now)
+Everything compiles and looks like it should be.
+
+I run the code, I see the box
+
+@@@
+@standard
+
+# RENDERING FUN
 
 Everything compiles and looks like it should be.
 
-I run the code, I see the box and then...
+I run the code, I see the box
+
+![](/images/before-text.png)
+
+@@@
+@standard
+
+# RENDERING FUN
+
+Everything compiles and looks like it should be.
+
+I run the code, I see the box
+
+![](/images/before-text.png)
+
+and then...
 
 @@@
 @image-fullscreen
@@ -1089,6 +1124,17 @@ So the font file we want to use does not exist, and the idea of a filesystem is 
 @@@
 @standard
 
+# EMPTY SANDBOX
+
+The environment we are in does not have much else outside of what we have given it.
+
+So the font file we want to use does not exist, and the idea of a filesystem is different from what we expect. We have to provide the files.
+
+![](/images/preload-file-2.png)
+
+@@@
+@standard
+
 # CMAKE
 
 What Emscripten also provides is helper utilities to use common development tools like make and cmake.
@@ -1126,6 +1172,17 @@ So I also wrote a simple CMake file for building the project.
 Great! So now we have everything running.
 
 Let’s look at it in action!
+
+@@@
+@standard
+
+# IT’S RUNNING!
+
+Great! So now we have everything running.
+
+Let’s look at it in action!
+
+<iframe class="example-frame-2" scrolling="no" src="http://localhost:8004/build/game.html" height="420" width="450"></iframe>
 
 @@@
 @standard
